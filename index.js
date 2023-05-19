@@ -41,7 +41,7 @@ async function run() {
             const result = await toyCollection.insertOne(newTeddy);
             res.send(result);
         })
-
+        // READ
         app.get('/teddys', async(req, res) => {
             const result = await toyCollection.find({}).toArray();
             res.send(result);
@@ -54,6 +54,36 @@ async function run() {
             }
             const result = await toyCollection.find(query).toArray();
             res.send(result);
+        })
+        // UPDATE
+        app.get('/teddys/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: new ObjectId(id) };
+            const result = await toyCollection.findOne(query);
+            res.send(result);
+        })
+
+        // UPDATE
+        app.put('/teddys/:id', async (req, res) => {
+            const id = req.params.id;
+            const filter = { _id: new ObjectId(id) };
+            const options = { upsert: true };
+            const updateTeddy = req.body;
+            const teddy = {
+                $set:{
+                    toyName: updateTeddy.toyName,
+                    email: updateTeddy.email,
+                    sellerName: updateTeddy.sellerName,
+                    photo: updateTeddy.photo,
+                    quantity: updateTeddy.quantity,
+                    rating: updateTeddy.rating,
+                    price : updateTeddy.price ,
+                    subCategory: updateTeddy.subCategory,
+                    description: updateTeddy.description,
+                }
+            }
+            const result = await toyCollection.updateOne(filter, teddy, options);
+            res.send(result)
         })
 
          // DELETE
