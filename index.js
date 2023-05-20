@@ -81,14 +81,8 @@ async function run() {
             const updateTeddy = req.body;
             const teddy = {
                 $set:{
-                    toyName: updateTeddy.toyName,
-                    email: updateTeddy.email,
-                    sellerName: updateTeddy.sellerName,
-                    photo: updateTeddy.photo,
                     quantity: updateTeddy.quantity,
-                    rating: updateTeddy.rating,
                     price : updateTeddy.price ,
-                    subCategory: updateTeddy.subCategory,
                     description: updateTeddy.description,
                 }
             }
