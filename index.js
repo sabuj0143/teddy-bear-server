@@ -43,7 +43,7 @@ async function run() {
         })
         // READ
         app.get('/teddys', async(req, res) => {
-            const result = await toyCollection.find({}).toArray();
+            const result = await toyCollection.find({}).limit(20).toArray();
             res.send(result);
         })
         // READ2
