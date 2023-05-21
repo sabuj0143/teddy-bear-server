@@ -37,7 +37,6 @@ async function run() {
         // POST
         app.post('/teddys', async (req, res) => {
             const newTeddy = req.body;
-            console.log(newTeddy);
             const result = await toyCollection.insertOne(newTeddy);
             res.send(result);
         })
@@ -58,7 +57,6 @@ async function run() {
             let query = {};
             if(req.query?.email){
                query = {email:req.query.email}
-               console.log(query)
             }
             const result = await toyCollection.find(query).toArray();
             res.send(result);
